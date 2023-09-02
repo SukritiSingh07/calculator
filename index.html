@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,15 @@
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,500&display=swap');
-    *{
+
+    * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         font-family: 'Poppins', sans-serif;
     }
 
-    body{
+    body {
         width: 100%;
         height: 100vh;
         display: flex;
@@ -24,15 +26,15 @@
         background: linear-gradient(45deg, #0a0a0a, #3a4452);
     }
 
-    .calculator{
+    .calculator {
         border: 1px solid #717377;
         padding: 20px;
         border-radius: 16px;
-        background:transparent;
+        background: transparent;
         box-shadow: 0px 3px 15px rgba(113, 115, 119, 0.5);
     }
 
-    .calculator input{
+    .calculator input {
         width: 320px;
         border: none;
         padding: 24px;
@@ -44,7 +46,7 @@
         color: #fff;
     }
 
-    button{
+    button {
         border: none;
         width: 60px;
         height: 60px;
@@ -57,126 +59,148 @@
         cursor: pointer;
     }
 
-    .operator{
+    .operator {
         color: #fb7c14;
     }
 
-    button .equalbtn{
+    button .equalbtn {
         color: #6dee0a;
     }
 </style>
+
 <body>
     <div class="calculator">
         <input type="text" placeholder="0" id="inputBox">
-     
-    <div>
-        <button class="operator">AC</button>
-        <button class="operator">DEL</button>
-        <button class="operator">%</button>
-        <button class="operator">/</button>
-    </div>
-    <div>
-        <button class="seven">7</button>
-        <button class="eight">8</button>
-        <button class="nine">9</button>
-        <button class="operator mul">*</button>
-    </div>
-    <div>
-        <button class="four">4</button>
-        <button class="five">5</button>
-        <button class="six">6</button>
-        <button class="operator plus">+</button>
-    </div>
-    <div>
-        <button class="one">1</button>
-        <button class="two">2</button>
-        <button class="three">3</button>
-        <button class="operator minus">-</button>
-    </div>
-    <div>
-        <button class="zero">0</button>
-        <button class="dot">.</button>
-        <button class="equalbtn">=</button>
-    </div>
-</div>
-<script>
-    let input= document.getElementById('inputBox');
-    let buttons= document.querySelectorAll('button');
 
-    let string = "";
-    let arr = Array.from(buttons);
-    arr.forEach(button=>{
-        button.addEventListener("click", (e)=>{
-            if(e.target.innerHTML== '='){
-                string= eval(string);
-                input.value=string;
-            }
-            else if(e.target.innerHTML=='AC'){
-                string="";
-                input.value=string;
-            }
-            else if(e.target.innerHTML=='DEL'){
-                string=string.substring(0, string.length-1);
-                input.value= string;
-            }
-            else{
-                string+= e.target.innerHTML;
-                input.value=string;
-            }
+        <div>
+            <button class="operator ac">AC</button>
+            <button class="operator del">DEL</button>
+            <button class="operator perc">%</button>
+            <button class="operator divide">/</button>
+        </div>
+        <div>
+            <button class="seven">7</button>
+            <button class="eight">8</button>
+            <button class="nine">9</button>
+            <button class="operator mul">*</button>
+        </div>
+        <div>
+            <button class="four">4</button>
+            <button class="five">5</button>
+            <button class="six">6</button>
+            <button class="operator plus">+</button>
+        </div>
+        <div>
+            <button class="one">1</button>
+            <button class="two">2</button>
+            <button class="three">3</button>
+            <button class="operator minus">-</button>
+        </div>
+        <div>
+            <button class="zero">0</button>
+            <button class="dot">.</button>
+            <button class="equalbtn">=</button>
+        </div>
+    </div>
+    <script>
+        let input = document.getElementById('inputBox');
+        let buttons = document.querySelectorAll('button');
+
+        let expression = "";
+        let arr = Array.from(buttons);
+        arr.forEach(button => {
+            button.addEventListener("click", (e) => {
+                if (e.target.innerHTML == '=') {
+                    calculate();
+                }
+                else if (e.target.innerHTML == 'AC') {
+                    expression = "";
+                    input.value = expression;
+                }
+                else if (e.target.innerHTML == 'DEL') {
+                    expression = expression.substring(0, expression.length - 1);
+                    input.value = expression;
+                }
+                else {
+                    expression += e.target.innerHTML;
+                    input.value = expression;
+                }
+            })
         })
-    })
-    document.addEventListener("keypress", function (event){
-        switch(event.key){
-            case "0":
-                document.querySelector(".zero").click();
-                break;
-            case "1":
-                document.querySelector(".one").click();
-                break;
-            case "2":
-                document.querySelector(".two").click();
-                break;
-            case "3":
-                document.querySelector(".three").click();
-                break;
-            case "4":
-                document.querySelector(".four").click();
-                break;
-            case "5":
-                document.querySelector(".five").click();
-                break;
-            case "6":
-                document.querySelector(".six").click();
-                break;
-            case "7":
-                document.querySelector(".seven").click();
-                break;
-            case "8":
-                document.querySelector(".eight").click();
-                break;
-            case "9":
-                document.querySelector(".nine").click();
-                break;
-            case "*":
-                document.querySelector(".mul").click();
-                break;
-            case "+":
-                document.querySelector(".plus").click();
-                break;
-            case "-":
-                document.querySelector(".minus").click();
-                break;
-            case "/":
-                document.querySelector(".divide").click();
-                break;
-            case "=":
-                document.querySelector(".equalbtn").click();
-                break;
-            case ".":
-                document.querySelector(".dot").click();
-                break;
+
+        function calculate() {
+            try {
+                const result = eval(expression);
+                input.value = result;
+                expression = result.toString();
+            } catch (error) {
+                input.value = 'Error';
+            }
         }
-    });
-</script>
+
+        document.addEventListener("keydown", function (event) {
+            switch (event.key) {
+                case "0":
+                    document.querySelector(".zero").click();
+                    break;
+                case "1":
+                    document.querySelector(".one").click();
+                    break;
+                case "2":
+                    document.querySelector(".two").click();
+                    break;
+                case "3":
+                    document.querySelector(".three").click();
+                    break;
+                case "4":
+                    document.querySelector(".four").click();
+                    break;
+                case "5":
+                    document.querySelector(".five").click();
+                    break;
+                case "6":
+                    document.querySelector(".six").click();
+                    break;
+                case "7":
+                    document.querySelector(".seven").click();
+                    break;
+                case "8":
+                    document.querySelector(".eight").click();
+                    break;
+                case "9":
+                    document.querySelector(".nine").click();
+                    break;
+                case "*":
+                    document.querySelector(".mul").click();
+                    break;
+                case "+":
+                    document.querySelector(".plus").click();
+                    break;
+                case "-":
+                    document.querySelector(".minus").click();
+                    break;
+                case "/":
+                    document.querySelector(".divide").click();
+                    break;
+                case "Backspace":
+                    event.preventDefault();
+                    document.querySelector(".del").click();
+                    break;
+                case "Escape":
+                    event.preventDefault();
+                    document.querySelector(".ac").click();
+                    break;
+
+                case "%":
+                    document.querySelector(".perc").click();
+                    break;
+                case "=":
+                case "Enter":
+                    document.querySelector(".equalbtn").click();
+                    break;
+            }
+        });
+    </script>
 </body>
+
 </html>
